@@ -163,7 +163,7 @@ class OSEnum:
             logging.info(f"  mounts[Data]: {mounts['Data']}")
         except:
             mounts["Data"] = None
-            logging.info(f"  Failed to mount Data (FileVault?)")
+            logging.info("  Failed to mount Data (FileVault?)")
 
         rec_vgid = volumes["Recovery"]["APFSVolumeUUID"]
         preboot_vgid = volumes["Preboot"]["APFSVolumeUUID"]
@@ -193,7 +193,7 @@ class OSEnum:
                 logging.info(f"    Version: {osi.version}")
                 break
             except FileNotFoundError:
-                logging.info(f"    Not Found")
+                logging.info("    Not Found")
                 continue
 
         try:
@@ -202,13 +202,13 @@ class OSEnum:
             osi.admin_users = list(auri.keys())
             logging.info(f"  Admin users: {osi.admin_users}")
         except:
-            logging.warning(f"  Failed to get AdminUserRecoveryInfo.plist")
+            logging.warning("  Failed to get AdminUserRecoveryInfo.plist")
             pass
 
         try:
             bps = self.bputil("-d", "-v", vgid)
         except subprocess.CalledProcessError:
-            logging.warning(f"  bputil failed")
+            logging.warning("  bputil failed")
             return osi
 
         osi.bp = {}

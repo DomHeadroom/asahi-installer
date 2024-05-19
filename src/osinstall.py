@@ -174,7 +174,7 @@ class OSInstaller(PackageInstaller):
 
         p_progress("Preparing to finish installation...")
 
-        logging.info(f"Building boot object")
+        logging.info("Building boot object")
         boot_object = self.template["boot_object"]
         next_object = self.template.get("next_object", None)
         logging.info(f"  Boot object: {boot_object}")
@@ -187,7 +187,7 @@ class OSInstaller(PackageInstaller):
             assert self.efi_part is not None
             m1n1_vars.append(f"chainload={self.efi_part.uuid.lower()};{next_object}")
 
-        logging.info(f"m1n1 vars:")
+        logging.info("m1n1 vars:")
         for i in m1n1_vars:
             logging.info(f"  {i}")
 

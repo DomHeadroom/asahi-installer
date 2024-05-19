@@ -46,7 +46,7 @@ EXPLANATIONS = {
 
 def show_data(data):
     print()
-    p_message(f"This is the data that will be sent:")
+    p_message("This is the data that will be sent:")
 
     for line in json.dumps(data, indent=4).split("\n"):
         if not line:

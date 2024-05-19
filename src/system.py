@@ -154,7 +154,7 @@ class SystemInfo:
         if self.fsfr_ver:
             p_info(f"  Fallback firmware version: {col()}{self.fsfr_ver} ({self.fsfr_build})")
         else:
-            p_info(f"  No Fallback System Firmware / rOS")
+            p_info("  No Fallback System Firmware / rOS")
         p_info(f"  SFR version: {col()}{self.sfr_full_ver}")
         p_info(f"  SystemRecovery version: {col()}{self.sros_full_ver} ({self.sros_ver} {self.sros_build})")
         p_info(f"  Login user: {col()}{self.login_user}")

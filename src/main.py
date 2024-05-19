@@ -127,7 +127,7 @@ class InstallerMain:
         self.flush_input()
         if default is not None:
             prompt += f" ({default})"
-        new_size = input_prompt(prompt + f": ").strip()
+        new_size = input_prompt(prompt + ": ").strip()
         try:
             if default is not None and not new_size:
                 new_size = default
@@ -197,7 +197,7 @@ class InstallerMain:
             elif res.lower() in ("n", "no", "0", "false"):
                 return False
 
-            p_warning(f"Please enter 'Y' or 'N'")
+            p_warning("Please enter 'Y' or 'N'")
 
     def check_cur_os(self):
         if self.cur_os is None:
@@ -412,7 +412,7 @@ class InstallerMain:
                 p_message(f"Path: {self.ins.boot_obj_path}")
                 return False
 
-            p_progress(f"Transferring m1n1 variables:")
+            p_progress("Transferring m1n1 variables:")
             for v in vars:
                 p_info(f"  {v}")
 
@@ -648,11 +648,11 @@ class InstallerMain:
     def can_resize(self, p):
         logging.info(f"Checking resizability of {p.name}")
         if p.type != "Apple_APFS":
-            logging.info(f"  Not APFS or system container")
+            logging.info("  Not APFS or system container")
             return False
 
         if p.container is None:
-            logging.info(f"  No container?")
+            logging.info("  No container?")
             return False
 
         min_space = self.get_min_free_space(p) + psize("500MB")
@@ -661,10 +661,10 @@ class InstallerMain:
         free = p.container["CapacityFree"]
         logging.info(f"  Free space: {free}")
         if free <= min_space:
-            logging.info(f"  Cannot resize")
+            logging.info("  Cannot resize")
             return False
         else:
-            logging.info(f"  Can resize")
+            logging.info("  Can resize")
             return True
 
     def action_resize(self, resizable):
@@ -910,7 +910,7 @@ class InstallerMain:
                 if p.label is not None:
                     p.desc += f" [{p.label}]"
                 if p.container is None:
-                    p.desc += f" (not a container)"
+                    p.desc += " (not a container)"
                 else:
                     vols = p.container["Volumes"]
                     p.desc += f" ({ssize(p.size)}, {len(vols)} volume{'s' if len(vols) != 1 else ''})"

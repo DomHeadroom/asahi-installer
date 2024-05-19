@@ -313,7 +313,7 @@ class PackageInstaller:
         except KeyError:
             if not optional:
                 raise
-            logging.info(f"    (SKIPPED)")
+            logging.info("    (SKIPPED)")
         if self.verbose:
             self.flush_progress()
 

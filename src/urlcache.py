@@ -127,7 +127,7 @@ class URLCache:
                 data = self.get_partial(off, size, bypass_cache=(retry == retries))
             except Exception as e:
                 if retry == retries:
-                    p_error(f"Exceeded maximum retries downloading data.")
+                    p_error("Exceeded maximum retries downloading data.")
                     raise
                 p_warning(f"Error downloading data ({e}), retrying... ({retry + 1}/{retries})")
                 time.sleep(sleep)

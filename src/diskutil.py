@@ -45,7 +45,7 @@ class DiskUtil:
         return plistlib.loads(result.stdout)
 
     def get_list(self):
-        logging.info(f"DiskUtil.get_list()")
+        logging.info("DiskUtil.get_list()")
         self.list = self.get("list", "-plist")
         self.disk_list = self.list["WholeDisks"]
         logging.debug("  Whole disks:")
@@ -71,14 +71,14 @@ class DiskUtil:
             self.ctnr_by_store[ctnr["DesignatedPhysicalStore"]] = ctnr
 
     def get_disk_info(self):
-        logging.info(f"DiskUtil.get_disk_info()")
+        logging.info("DiskUtil.get_disk_info()")
         self.disks = {}
         for i in self.disk_list:
             self.disks[i] = self.get("info", "-plist", i)
             logging.debug(f" {i}: {self.disks[i]}")
 
     def get_info(self):
-        logging.info(f"DiskUtil.get_info()")
+        logging.info("DiskUtil.get_info()")
         self.get_list()
         self.ctnr_by_ref = {}
         self.ctnr_by_store = {}
@@ -86,7 +86,7 @@ class DiskUtil:
         self.get_disk_info()
 
     def find_system_disk(self):
-        logging.info(f"DiskUtil.find_system_disk()")
+        logging.info("DiskUtil.find_system_disk()")
         for name, dsk in self.disks.items():
             try:
                 if dsk["VirtualOrPhysical"] == "Virtual":
@@ -102,7 +102,7 @@ class DiskUtil:
         raise Exception("Could not find system disk")
 
     def find_external_disks(self):
-        logging.info(f"DiskUtil.find_external_disks()")
+        logging.info("DiskUtil.find_external_disks()")
         disks = []
         for name, dsk in self.disks.items():
             try:

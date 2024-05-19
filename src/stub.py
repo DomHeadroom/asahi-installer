@@ -44,7 +44,7 @@ class StubInstaller(PackageInstaller):
             p_progress("Loading macOS OS package info...")
             self.pkg = zipfile.ZipFile(open(url, "rb"))
         self.flush_progress()
-        logging.info(f"OS package opened")
+        logging.info("OS package opened")
         print()
 
     def prepare_volume(self, part):
