@@ -204,7 +204,7 @@ class DiskUtil:
     def addVolume(self, container, name, **kwargs):
         args = []
         for k, v in kwargs.items():
-            args.extend(["-" + k, v])
+            args.extend([f"-{k}", v])
         try:
             self.action("apfs", "addVolume", container, "apfs", name, *args, verbose=True)
         except subprocess.CalledProcessError as e:

@@ -46,7 +46,7 @@ class OSInstaller(PackageInstaller):
             return
 
         if not package.startswith("http"):
-            package = os.environ.get("REPO_BASE", ".") + "/os/" + package
+            package = f"{os.environ.get("REPO_BASE", ".")}/os/{package}"
 
         logging.info(f"OS package URL: {package}")
         if package.startswith("http"):
@@ -57,7 +57,7 @@ class OSInstaller(PackageInstaller):
             p_progress("Loading OS package info...")
             self.pkg = zipfile.ZipFile(open(package, "rb"))
         self.flush_progress()
-        logging.info(f"OS package opened")
+        logging.info("OS package opened")
 
     def flush_progress(self):
         if self.ucache:

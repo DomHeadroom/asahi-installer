@@ -127,7 +127,7 @@ class InstallerMain:
         self.flush_input()
         if default is not None:
             prompt += f" ({default})"
-        new_size = input_prompt(prompt + ": ").strip()
+        new_size = input_prompt(f"{prompt}: ").strip()
         try:
             if default is not None and not new_size:
                 new_size = default
@@ -140,7 +140,7 @@ class InstallerMain:
             elif new_size.endswith("B"):
                 val = psize(new_size.upper())
             else:
-                val = psize(new_size.upper() + "B")
+                val = psize(f"{new_size.upper()}B")
         except Exception as e:
             print(e)
             val = None
@@ -169,7 +169,7 @@ class InstallerMain:
 
         while True:
             self.flush_input()
-            res = input_prompt(prompt + ": ").strip()
+            res = input_prompt(f"{prompt}: ").strip()
             if res == "" and default is not None:
                 res = str(default)
             if res not in options:
@@ -523,7 +523,7 @@ class InstallerMain:
             p_progress("Setting the new OS as the default boot volume...")
             try:
                 subprocess.run(["bless", "--setBoot",
-                                "--device", "/dev/" + self.ins.osi.sys_volume,
+                                "--device", f"/dev/{self.ins.osi.sys_volume}",
                                 "--user", self.admin_user, "--stdinpass"],
                                input=self.admin_password.encode("utf-8"),
                                check=True)
@@ -536,7 +536,7 @@ class InstallerMain:
                     p_warning("Let's try a different way. Sorry, you'll have to type it in again.")
                     try:
                         subprocess.run(["bless", "--setBoot",
-                                        "--device", "/dev/" + self.ins.osi.sys_volume,
+                                        "--device", f"/dev/{self.ins.osi.sys_volume}",
                                         "--user", self.admin_user], check=True)
                         print()
                         return
@@ -934,10 +934,10 @@ class InstallerMain:
         self.is_sfr_recovery = self.sysinfo.boot_vgid in (osenum.UUID_SROS, osenum.UUID_FROS)
         default_os = None
 
-        r = col(YELLOW) + "R" + col()
-        b = col(GREEN) + "B" + col()
-        u = col(RED) + "?" + col()
-        d = col(BRIGHT) + "*" + col()
+        r = f"{col(YELLOW)}R{col()}"
+        b = f"{col(GREEN)}B{col()}"
+        u = f"{col(RED)}?{col()}"
+        d = f"{col(BRIGHT)}*{col()}"
 
         is_gpt = self.dutil.disks[self.cur_disk]["Content"] == "GUID_partition_scheme"
 

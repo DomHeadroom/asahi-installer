@@ -26,7 +26,7 @@ class StubInstaller(PackageInstaller):
         base = os.environ.get("IPSW_BASE", None)
         url = ipsw_info.url
         if base:
-            url = base + "/" + os.path.split(url)[-1]
+            url = f"{base}/{os.path.split(url)[-1]}"
 
         if not url.endswith(".ipsw"):
             self.is_ota = True
@@ -71,7 +71,7 @@ class StubInstaller(PackageInstaller):
         if not by_role.get(("Data",), None):
             if default_vol := by_role.get((), None):
                 self.dutil.changeVolumeRole(default_vol[0]["DeviceIdentifier"], "D")
-                self.dutil.rename(default_vol[0]["DeviceIdentifier"], self.label + " - Data")
+                self.dutil.rename(default_vol[0]["DeviceIdentifier"], f"{self.label} - Data")
             else:
                 self.dutil.addVolume(ctref, self.label, role="D")
             self.dutil.refresh_part(self.part)
@@ -405,7 +405,7 @@ class StubInstaller(PackageInstaller):
                 fud_dir = os.path.join("fud_firmware", device)
                 os.makedirs(fud_dir, exist_ok=True)
                 os.symlink(os.path.join("..", path),
-                           os.path.join(fud_dir, key + ".im4p"))
+                           os.path.join(fud_dir, f"{key}.im4p"))
 
         img = os.path.join(self.osi.recovery, self.osi.vgid,
                            "usr/standalone/firmware/arm64eBaseSystem.dmg")

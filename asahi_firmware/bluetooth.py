@@ -89,7 +89,7 @@ class BluetoothFWCollection(object):
 
         for i in self.STRIP_SUFFIXES:
             board_type = board_type.rstrip(i)
-        board_type = "apple," + board_type.lower()
+        board_type = f"apple,{board_type.lower()}"
 
         # make sure we can identify exactly one vendor
         otp_values = set()
@@ -115,14 +115,14 @@ class BluetoothFWCollection(object):
                 log.warning(f"no bin for {chip}")
                 continue
             else:
-                yield fname_base + ".bin", bin
+                yield (f"{fname_base}.bin", bin)
 
             if ptb is None:
                 if (chip.chip, chip.stepping, chip.board_type) not in INCOMPLETE_CHIPS:
                     log.warning(f"no ptb for {chip}")
                 continue
             else:
-                yield fname_base + ".ptb", ptb
+                yield (f"{fname_base}.ptb", ptb)
 
 
 if __name__ == "__main__":

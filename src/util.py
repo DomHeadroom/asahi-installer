@@ -85,7 +85,7 @@ def p_style(*args, color=[], **kwargs):
     if isinstance(color, int):
         color = [color]
     text = " ".join(map(str, args))
-    print(col(*color) + text + col(), **kwargs)
+    print(f"{col(*color)}{text}{col()}", **kwargs)
     if "\033" in text:
         text += col()
     logging.info(f"MSG: {text}")
@@ -244,7 +244,7 @@ class PackageInstaller:
         st = time.time()
         self.ucache.bytes_read = 0
         copied = 0
-        with open(path + '/..namedfork/rsrc', 'wb') as res_fork:
+        with open(f'{path}/..namedfork/rsrc', 'wb') as res_fork:
             res_fork.write(b'\0' * cur_pos)
             for i in range(num_chunks):
                 table.append(cur_pos)

@@ -54,7 +54,7 @@ def show_data(data):
         for key, exp in EXPLANATIONS.items():
             indent = line[:len(line) - len(line.lstrip())]
             if line.strip().startswith(f'"{key}"'):
-                exp = indent + exp.replace("\n", "\n" + indent)
+                exp = f"{indent}{exp.replace("\n", "\n" + indent)}"
                 p_message(exp)
                 break
         p_info(line)

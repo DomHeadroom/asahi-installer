@@ -47,12 +47,12 @@ class WiFiFWCollection(object):
                 dirnames.remove("assert")
             subpath = dirpath.lstrip(source_path)
             for name in sorted(filenames):
-                if not any(name.endswith("." + i) for i in self.EXTMAP):
+                if not any(name.endswith(f".{i}") for i in self.EXTMAP):
                     continue
                 path = os.path.join(dirpath, name)
                 relpath = os.path.join(subpath, name)
                 if not name.endswith(".txt"):
-                    name = "P-" + name
+                    name = f"P-{name}"
                 idpath, ext = os.path.join(subpath, name).rsplit(".", 1)
                 props = {}
                 for i in idpath.replace("/", "_").split("_"):

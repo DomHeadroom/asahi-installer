@@ -34,7 +34,7 @@ class OSInfo:
         elif self.vgid == UUID_FROS:
             return f"recoveryOS v{self.version} [Fallback recoveryOS]"
 
-        lbl = col(BRIGHT) + self.label + col()
+        lbl = f"{col(BRIGHT)}{self.label}{col()}"
         if not self.stub:
             macos = f"{col(BRIGHT, GREEN)}macOS v{self.version}{col()}"
             if self.m1n1_ver is not None:
@@ -225,7 +225,7 @@ class OSEnum:
             fuos_path = os.path.join(mounts["Preboot"], vgid, "boot",
                                      osi.bp["nsih"],
                                      "System/Library/Caches/com.apple.kernelcaches",
-                                     "kernelcache.custom." + coih)
+                                     f"kernelcache.custom.{coih}")
             if os.path.exists(fuos_path):
                 osi.m1n1_ver = m1n1.get_version(fuos_path)
                 if osi.m1n1_ver:
